@@ -32,3 +32,4 @@ Open that link on the Browser
 
 # References
 1. https://reactjs.org/tutorial/tutorial.html
+1. Create `pro-01-react-simple` by using `npx`: https://reactjs.org/docs/create-a-new-react-app.html#create-react-app

@@ -1,0 +1,11 @@
+**/*.iml
+**/.idea
+**/*.ddl
+**/target
+**/.m2
+**/generated
+**/node/
+**/node_modules/
+**/.DS_Store
+**/deploy.retry
+**/.terraform/*

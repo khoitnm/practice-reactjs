@@ -1,0 +1,54 @@
+{
+  "name": "pro-00-server-simple",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "clean": "jest --clearCache && rm -rf node_modules ./src/*/*/node_modules yarn.lock .yarnclean .eslintcache coverage jest-test-reports",
+    "test": "jest",
+    "test:clean": "jest --clearCache",
+    "test:coverage": "jest --coverage",
+    "posttest": "node -e 'console.log(\"Finish testing\")'",
+    "start": "nodemon src/server.js",
+    "start:ci": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.17.1",
+    "jest": "~26.6.3",
+    "module-alias": "^2.2.2",
+    "nodemon": "~2.0.6"
+  },
+  "devDependencies": {
+    "supertest": "^6.0.1"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@src": "./src",
+    "@config": "./config"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleNameMapper": {
+      "@root/(.*)$": "<rootDir>/$1",
+      "@src/(.*)$": "<rootDir>/src/$1"
+    }
+  },
+  "//comment": {
+    "dependencies": {
+      "express": "Restful API server",
+      "nodemon": "Automatically restarting the node application when file changes in the directory are detected. Ref https://www.freecodecamp.org/news/you-should-never-ever-run-directly-against-node-js-in-production-maybe-7fdfaed51ec6/",
+      "jest": "A testing framework developed by Facebook. It works out of the box with minimal configuration and has in-built test runner, assertion library and mocking support.",
+      "supertest": "A library for testing Node.js HTTP servers. It enables us to programmatically send HTTP requests such as GET, POST, PATCH, PUT, DELETE to HTTP servers and get results.",
+      "module-alias": "Help use to import module without using relative path. Ref: https://medium.com/@kenichishibata/3-ways-to-fix-relative-paths-in-nodejs-require-ffc7f89bd7e1 and https://github.com/patrick-steele-idem/app-module-path-node"
+    },
+    "script": {
+      "posttest": "this script will be run automatically after the test is finished."
+    }
+  }
+}

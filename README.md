@@ -38,4 +38,4 @@ Open that link on the Browser
      - Start building your app with just pPresentational Components first. 
       If you feel unsure about whether a specific component should be presentational or a container, it might be too early to decide. 
       Don’t sweat it! 
-      
+1. Props vs. State: https://kentcdodds.com/blog/props-vs-state      

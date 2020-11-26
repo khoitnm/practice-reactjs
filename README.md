@@ -33,3 +33,9 @@ Open that link on the Browser
 # References
 1. https://reactjs.org/tutorial/tutorial.html
 1. Create `pro-01-react-simple` by using `npx`: https://reactjs.org/docs/create-a-new-react-app.html#create-react-app
+1. Splitting Presentational Components (written as Functional Component) and Business Components: https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
+     - Functional Component:  https://reactjs.org/blog/2015/10/07/react-v0.14.html#stateless-functional-components
+     - Start building your app with just pPresentational Components first. 
+      If you feel unsure about whether a specific component should be presentational or a container, it might be too early to decide. 
+      Don’t sweat it! 
+      

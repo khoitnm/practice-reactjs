@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-
+This code follows [this tutorial](https://reactjs.org/tutorial/tutorial.html). <br/> 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ```
 npx create-react-app pro-01-react-simple

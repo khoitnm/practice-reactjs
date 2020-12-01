@@ -1,17 +1,13 @@
 # Getting Started with Create React App
 ## Intro
-This practice just shows you how to implement very simple ReactJS components, its properties and states.
+In this project, we practice how to manage state (with immutable approach), and trigger function on a component.
+The benefits of immutable approach: https://reactjs.org/tutorial/tutorial.html#why-immutability-is-important
+- Simplify complex features (sometimes, with event-driven and time travelling requirements)
+- Detecting changes
+- Optimization performance for React to determine should re-render or not (based on detecting changes)
 
 ## Development 
-This code follows [this tutorial](https://reactjs.org/tutorial/tutorial.html). <br/> 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-```
-npx create-react-app pro-02-react-state
-```
-
-## Troubleshooting
-- Error: `npm install --save --save-exact --loglevel error react react-dom react-scripts cra-template has failed.`
-- Solution: `npm cache clean --force`, then re-run `npx create-react-app xxx`
+This code follows [this tutorial](https://reactjs.org/tutorial/tutorial.html#lifting-state-up). <br/> 
 
 # Other Available Scripts
 

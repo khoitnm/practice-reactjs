@@ -1,16 +1,19 @@
 # Getting Started with Create React App
+## Intro
+This practice just shows you how to implement very simple ReactJS components, its properties and states.
+
+## Development 
 This code follows [this tutorial](https://reactjs.org/tutorial/tutorial.html). <br/> 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ```
 npx create-react-app pro-01-react-simple
 ```
 
-Troubleshooting:
+## Troubleshooting
 - Error: `npm install --save --save-exact --loglevel error react react-dom react-scripts cra-template has failed.`
 - Solution: `npm cache clean --force`, then re-run `npx create-react-app xxx`
-` 
 
-## Available Scripts
+# Other Available Scripts
 
 In the project directory, you can run:
 

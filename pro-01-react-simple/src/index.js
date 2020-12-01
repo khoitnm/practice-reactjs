@@ -16,8 +16,11 @@ class Square extends React.Component {
   render() {
     return (
       <button className="square" onClick={() => this.setState({value: 'X'})}>
-        {/* Properties vs. State: https://kentcdodds.com/blog/props-vs-state */}
-        {this.state.value} - {this.props.value}
+        {/*
+            Properties vs. State: https://kentcdodds.com/blog/props-vs-state
+            One limit to props is that you're not allowed to change them.
+        */}
+        State: {this.state.value} - Value: {this.props.value}
       </button>
     );
   }

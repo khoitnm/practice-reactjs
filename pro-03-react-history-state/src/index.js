@@ -4,21 +4,6 @@ import './index.css';
 
 const SQUARE_VALUE = 'X';
 
-/*
-For the Square component, instead of using a class, we'll just simplify the code by using a function.
-Hence Square is called "Function Component"
-
-This class will be replaced by the function Square(props)
-class Square extends React.Component {
-  render() {
-    return (
-      <button className="square" onClick={this.props.clickSquare}>
-        PropsValue: {this.props.propsValue}
-      </button>
-    );
-  }
-}
-*/
 function Square(props) {
   return (
     <button className="square" onClick={props.clickSquare}>
@@ -27,24 +12,27 @@ function Square(props) {
   );
 }
 
+class BoardState {
+    constructor(history = [new HistoryItem()], current = new HistoryItem()){
+      this.history = history;
+      this.current = current;
+    }
+}
 
-/*
-We may think that Board should just ask each Square for the Square’s state. Although this approach is possible in React, we discourage it because the code becomes difficult to understand, susceptible to bugs, and hard to refactor. Instead, the best approach is to store the game’s state in the parent Board component instead of in each Square. The Board component can tell each Square what to display by passing a prop, just like we did when we passed a number to each Square.
-To collect data from multiple children, or to have two child components communicate with each other, you need to declare the shared state in their parent component instead. The parent component can pass the state back down to the children by using props; this keeps the child components in sync with each other and with the parent component.
-*/
+class HistoryItem {
+    constructor(squares = Array(4).fill(null)){
+      this.squares = squares;
+    }
+}
+
 class Board extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      squares: Array(4).fill(null),
-    };
+    this.state = new BoardState();
   }
 
-  /*
-  It looks like this method is trigger whenever this.state is changed!
-  */
   render() {
-    let status = this.calculateSumStatus(this.state.squares);
+    let status = this.calculateSumStatus(this.state.current.squares);
     return (
       <div>
         <div className="status">{status}</div>
@@ -60,22 +48,17 @@ class Board extends React.Component {
 
   renderSquare(i) {
     return <Square
-            propsValue={this.state.squares[i] /* Square.props.propsValue == Board.state.squares[i] */}
+            propsValue={this.state.current.squares[i] /* Square.props.propsValue == Board.state.squares[i] */}
             clickSquare={() => this.handleClickSquareFromBoard(i) /* Square.props.clickSquare == handleClickSquareFromBoard(i) */}
             />;
   }
 
   handleClickSquareFromBoard(i) {
-    /*
-    We are using immutable approach here.
-    The benefits of this approach are: https://reactjs.org/tutorial/tutorial.html#why-immutability-is-important
-      - Simplify complex features (sometimes, with event-driven and time travelling requirements)
-      - Detecting changes
-      - Optimization performance for React to determine should re-render or not (based on detecting changes)
-    */
-    const squares = this.state.squares.slice();
-    squares[i] = SQUARE_VALUE;
-    this.setState({squares: squares});
+    const history = this.state.history.slice();
+    const currentSquares = this.state.current.squares.slice();
+    currentSquares[i] = SQUARE_VALUE;
+    const current = new HistoryItem(currentSquares);
+    this.setState(new BoardState(history, current));
   }
 
   calculateSumStatus(squares) {

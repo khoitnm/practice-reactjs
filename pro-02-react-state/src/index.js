@@ -99,25 +99,9 @@ class Board extends React.Component {
   }
 }
 
-class Game extends React.Component {
-  render() {
-    return (
-      <div className="game">
-        <div className="game-board">
-          <Board /> {/* Render Board component without any input properties (props) */}
-        </div>
-        <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
-        </div>
-      </div>
-    );
-  }
-}
-
 // ========================================
 
 ReactDOM.render(
-  <Game />,
+  <Board />,
   document.getElementById('root')
 );

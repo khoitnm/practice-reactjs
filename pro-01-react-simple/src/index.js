@@ -40,8 +40,6 @@ class Board extends React.Component {
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
-        </div>
-        <div className="board-row">
           {this.renderSquare(3)}
           {this.renderSquare(4)}
         </div>

@@ -51,8 +51,6 @@ class Board extends React.Component {
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
-        </div>
-        <div className="board-row">
           {this.renderSquare(2)}
           {this.renderSquare(3)}
         </div>

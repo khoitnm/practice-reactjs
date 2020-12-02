@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 const SQUARE_VALUE = 'X';
+const NUM_SQUARES = 4;
 
 function Square(props) {
   return (
@@ -20,7 +21,7 @@ class BoardState {
 }
 
 class HistoryItem {
-    constructor(squares = Array(4).fill(null)){
+    constructor(squares = Array(NUM_SQUARES).fill(null)){
       this.squares = squares;
     }
 }
@@ -54,11 +55,11 @@ class Board extends React.Component {
   }
 
   handleClickSquareFromBoard(i) {
-    const history = this.state.history.slice();
-    const currentSquares = this.state.current.squares.slice();
-    currentSquares[i] = SQUARE_VALUE;
-    const current = new HistoryItem(currentSquares);
-    this.setState(new BoardState(history, current));
+    const newCurrent = new HistoryItem(this.state.current.squares.slice());
+    const newHistory = this.state.history.slice();
+    newHistory.push(newCurrent);
+    newCurrent.squares[i] = SQUARE_VALUE;
+    this.setState(new BoardState(newHistory, newCurrent));
   }
 
   calculateSumStatus(squares) {

@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import store from './config/redux/store';
 
 const render = () => {
     // Sourcecode: https://redux-toolkit.js.org/tutorials/advanced-tutorial (click "Open Sandbox" section)
@@ -17,9 +15,7 @@ const render = () => {
         https://stackoverflow.com/questions/65779454/reactjs-swallow-some-log-messages
         */
         <React.Fragment>
-            <Provider store={store}>
-                <App />
-            </Provider>
+            <App />
         </React.Fragment>,
         document.getElementById('root')
     );

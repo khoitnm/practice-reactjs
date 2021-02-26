@@ -6,7 +6,7 @@ const App = (): JSX.Element => {
         // <Comp03UseEffectUseSelectorPage />
         // <Comp02SimpleUseEffectPage />
         // <Comp01SimpleUseSelectPage />
-        <Comp00SimplePage />
+        <h1>HELLO</h1>
     );
 };
 

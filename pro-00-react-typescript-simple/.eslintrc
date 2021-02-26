@@ -1,0 +1,70 @@
+{
+  "extends": [
+    /* "airbnb-typescript", */
+    /* "airbnb/hooks", */
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "prettier",                    // npm module "eslint-config-prettier" (not "eslint-plugin-prettier"): it's responsible for deactivating some ESLint rule sets which can conflict with Prettier. Ref https://indepth.dev/posts/1282/setting-up-efficient-workflows-with-eslint-prettier-and-typescript
+    "plugin:prettier/recommended", // Combined with plugin "prettier": Wiew more at https://github.com/prettier/eslint-plugin-prettier,
+    "prettier/flowtype",           // Combined with plugin "prettier": Some ESLint plugins (such as eslint-plugin-react) also contain rules that conflict with Prettier. This is used to avoid that conflict. View more at https://github.com/prettier/eslint-plugin-prettier,
+    "prettier/react",              // Combined with plugin "prettier": Some ESLint plugins (such as eslint-plugin-react) also contain rules that conflict with Prettier. This is used to avoid that conflict. View more at https://github.com/prettier/eslint-plugin-prettier,
+    "prettier/@typescript-eslint"  // Disable conflict rules in "@typescript-eslint". Ref: https://indepth.dev/posts/1282/setting-up-efficient-workflows-with-eslint-prettier-and-typescript
+  ],
+
+  /**
+   * https://indepth.dev/posts/1282/setting-up-efficient-workflows-with-eslint-prettier-and-typescript
+   * Plugins contain rules that have been written by using a parser.
+   * As long as the plugin name does not start with eslint-plugin- or @ or ./ then you have to just prefix the plugin name with eslint-plugin-.
+   */
+  "plugins": [
+    "@typescript-eslint", // npm module "@typescript-eslint/eslint-plugin"
+    "jest",               // npm module "eslint-plugin-jest"
+    "prettier"            // npm module "eslint-plugin-prettier", view more at https://github.com/prettier/eslint-plugin-prettier
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    /* "prettier/prettier": "error", // Combined with plugin "prettier" // Don't need this because it's include inside extends "plugin:prettier/recommended" */
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "@typescript-eslint/no-unused-expressions": ["error"],
+
+    // https://stackoverflow.com/questions/63818415/react-was-used-before-it-was-defined/64024916#64024916
+    // note you must disable the base rule as it can report incorrect errors
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "no-unused-expressions": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off",
+    "max-len": ["off", {"code": 150}],
+    "indent": ["off", 4] /* When using prettier, you'd better disable eslint's indent rule: https://stackoverflow.com/questions/56337176/prettier-and-eslint-indents-not-working-together */
+
+    /* Below rules are not found */
+    /* "import/no-extraneous-dependencies": ["error", { "devDependencies": true }], */
+    /* "react-hooks/exhaustive-deps": "warn", */
+    /* "react/jsx-props-no-spreading": "warn", */
+
+  }
+}

@@ -1,0 +1,9 @@
+/node_modules
+/public
+/coverage
+/build
+
+package-lock.json
+.nyc_output
+cypress/coverage
+instrumented

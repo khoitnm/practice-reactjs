@@ -1,3 +1,7 @@
+# Purpose
+I use this just to check whether the code I'm writing exist inside the generated `./build` folder or not. \
+For example, I have a code which send REST call to `google.com`, hence I check and that word indeed exist inside `./build` folder. \
+
 # Steps to create this app
 __Step 1: Create app__
 ``` 

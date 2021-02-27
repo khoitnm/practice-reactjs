@@ -1,6 +1,6 @@
 # Purpose
 In this project, I would like the check what would be generated in `./build/` when applying `cross-env` module.
-That `./build/` is the result of `npm build`
+That `./build/` is the result of `npm run build`
 
 # Steps to create this app
 Exactly the same as `pro-00-0-react-ts-simple`, please view its `README.md`

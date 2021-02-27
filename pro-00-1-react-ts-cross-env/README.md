@@ -1,28 +1,14 @@
 # Purpose
-I use this just to check whether the code I'm writing exist inside the generated `./build` folder or not. \
-For example, I have a code which send REST call to `google.com`, hence I check and that word indeed exist inside `./build` folder. \
+In this project, I would like the check what would be generated in `./build/` when applying `cross-env` module.
+That `./build/` is the result of `npm build`
 
 # Steps to create this app
-__Step 1: Create app__
-``` 
-npx create-react-app pro-00-react-ts-simple --template typescript
-```
+Exactly the same as `pro-00-0-react-ts-simple`, please view its `README.md`
 
-__Step 2: Start app__
-```
-npm start 
-```
-
-If you get error:
-``` 
-It looks like you're trying to use TypeScript but do not have typescript installed.
-Please install typescript by running npm install typescript.
-If you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files).
-```
-It means that your project was not created with TypeScript enabled successfully.
-Solution:
-``` 
-npm uninstall -g create-react-app
-```
-And then run step 1 to re-create project again.
-Reference link for error and solution: https://create-react-app.dev/docs/adding-typescript/ 
+# Environment variables configuration
+cross-env: Introduction, Why, and How to use it: https://www.npmjs.com/package/cross-env
+dotenv: https://medium.com/dubizzletechblog/managing-environment-variables-in-nodejs-and-modern-js-apps-608003f4686c
+# Other references
+- Cypress and Instrumental: 
+    - Why do we need Cypress Instrumental: https://www.cypress.io/blog/2019/09/05/cypress-code-coverage-for-create-react-app-v3/
+    - Some guideline to use Cypress Instrumental: https://github.com/cypress-io/instrument-cra

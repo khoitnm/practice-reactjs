@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import envConfigLoader from "./config/EnvConfigLoader";
+
+envConfigLoader.load();
 
 ReactDOM.render(
-  <React.Fragment>
-    <App />
-  </React.Fragment>,
-  document.getElementById('root')
+    <React.Fragment>
+        <App/>
+    </React.Fragment>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

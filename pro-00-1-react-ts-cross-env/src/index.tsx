@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import envConfigLoader from "./config/EnvConfigLoader";
 
-envConfigLoader.load();
+console.log(`All env variables: ${JSON.stringify(process.env, null, 2)}`);
 
 ReactDOM.render(
     <React.Fragment>

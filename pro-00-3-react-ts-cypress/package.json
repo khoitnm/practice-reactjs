@@ -26,7 +26,7 @@
   "scripts": {
     "start": "env-cmd -f .env.development react-scripts start",
     "prebuild": "node build-tools/EnvLoader.ts",
-    "build": "env-cmd -f .env.production react-scripts build",
+    "build": "env-cmd -f .env.production react-scripts -r @cypress/instrument-cra build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

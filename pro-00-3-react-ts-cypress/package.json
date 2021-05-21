@@ -12,6 +12,7 @@
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "axios": "^0.21.1",
+    "cypress": "^7.3.0",
     "dotenv": "^8.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -24,9 +25,10 @@
     "env-cmd": "^10.1.0"
   },
   "scripts": {
-    "start": "env-cmd -f .env.development react-scripts start",
+    "start": "env-cmd -f .env_development react-scripts start",
     "prebuild": "node build-tools/EnvLoader.ts",
-    "build": "env-cmd -f .env.production react-scripts -r @cypress/instrument-cra build",
+    "build": "env-cmd -f .env_production react-scripts -r @cypress/instrument-cra build",
+    "cypress": "cypress open",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

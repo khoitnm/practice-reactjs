@@ -17,6 +17,7 @@ However, there's a case that we want to write cypress script inside another app 
 That's why we need `@cypress/instrument-cra` on `production` environment.
 
 # Research
+- Cypress tutorial: https://css-tricks.com/using-cypress-to-write-tests-for-a-react-application/
 - Understanding about code coverage and cypress instrument-cra: https://www.cypress.io/blog/2019/09/05/cypress-code-coverage-for-create-react-app-v3/
 - https://github.com/cypress-io/instrument-cra
 - CRA App (Create React App): https://create-react-app.dev/docs/getting-started/

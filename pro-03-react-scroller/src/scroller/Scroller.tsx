@@ -1,40 +1,64 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './scroller.css';
 import Item from "./Item";
+
+const createItem = (id: number): Item => {
+  return {
+    id: `${id}`,
+    name: `Name ${id} ${Date.now()}`
+  }
+}
 
 const createItems = (itemsCount: number): Item[] => {
   const result: Item[] = [];
   for (let i = 0; i < itemsCount; i++) {
-    result.push({
-      id: `${i}`,
-      name: `Name ${i} ${Date.now()}`
-    });
+    result.push(createItem(i));
   }
   return result;
 }
 
+
 const Scroller = (): JSX.Element => {
   const [items, setItems] = useState<Item[]>([]);
-  const [display, setDisplay] = useState<boolean>(true);
+  const [visibility, setVisibility] = useState<boolean>(true);
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  useEffect(() => {
+    console.log(`ScrollRef.current is changed (ScrollRef itself doesn't change): ${scrollRef?.current}`);
+    if (scrollRef?.current) {
+      console.log(`ScrollRef scrollTo ${scrollPosition}`);
+      scrollRef.current!.scrollTo({top: scrollPosition});
+    }
+  }, [scrollRef?.current])
 
   const onClickRegenItems = () => {
     setItems(oldState => createItems(50));
   }
+
   const onClickAddItems = () => {
     setItems(oldState => {
       const newState: Item[] = [...oldState];
       for (let i = 1; i <= 10; i++) {
-        newState.push({
-          id: `${newState.length + i}`,
-          name: `Name ${newState.length + i} ${Date.now()}`
-        });
+        newState.push(createItem(oldState.length + i));
       }
       return newState;
     });
   }
+
   const onClickChangeVisibility = () => {
-    setDisplay(oldState => !oldState);
+    setVisibility(oldState => !oldState);
   }
+
+  const onScroll = () => {
+    console.log(`Save scroll position into React state: ${scrollRef?.current?.scrollTop}`)
+    setScrollPosition(scrollRef?.current?.scrollTop);
+  }
+
+  const onClickChangeVisibilityWithSameScrollPosition = () => {
+    setVisibility(oldState => !oldState);
+  }
+
   const listItemsRender = items.map((item) =>
     <li key={item.id}>id: {item.id}, name: {item.name}</li>
   );
@@ -48,10 +72,12 @@ const Scroller = (): JSX.Element => {
 
       <div>
         <button onClick={onClickChangeVisibility}>Change Visibility (your scroller position will be reset)</button>
+        <button onClick={onClickChangeVisibilityWithSameScrollPosition}>Change Visibility (your scroller position will be kept the same)</button>
       </div>
+      <div>Scroll Position: {scrollPosition}</div>
 
-      {display &&
-      <div className="container">
+      {visibility &&
+      <div className="container" ref={scrollRef} onScroll={onScroll}>
           <ul>{listItemsRender}</ul>
       </div>
       }

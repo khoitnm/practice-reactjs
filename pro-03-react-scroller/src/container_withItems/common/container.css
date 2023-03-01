@@ -1,0 +1,20 @@
+.container {
+    align-self: center;
+    align-content: center;
+    width: 800px;
+    border: 1px solid black;
+    height: 300px;
+    overflow: scroll;
+}
+.item {
+    border: 1px solid #DDD;
+    padding: 5px;
+    margin: 5px;
+    width: 700px;
+    height: 30px;
+    background-color: #EEE;
+}
+.item:hover {
+    border: 1px solid black;
+    cursor: pointer;
+}

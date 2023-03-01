@@ -1,28 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
-import './scroller.css';
-import Item from "./Item";
+import '../common/container.css';
+import Item from "../common/Item";
+import {createItem, createItemsSortedRandomly, shuffle} from "../common/ItemHelper";
 
-const createItem = (id: number): Item => {
-  return {
-    id: `${id}`,
-    name: `Name ${id} ${Date.now()}`
-  }
-}
-
-const createItems = (itemsCount: number): Item[] => {
-  const result: Item[] = [];
-  for (let i = 0; i < itemsCount; i++) {
-    result.push(createItem(i));
-  }
-  return result;
-}
-
-
-const Scroller = (): JSX.Element => {
+const Container_SaveItemPosition = (): JSX.Element => {
   const [items, setItems] = useState<Item[]>([]);
   const [visibility, setVisibility] = useState<boolean>(true);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const [selectedItemId, setSelectedItemId] = useState<string | undefined>();
+
 
   useEffect(() => {
     console.log(`ScrollRef.current is changed (ScrollRef itself doesn't change): ${scrollRef?.current}`);
@@ -33,7 +20,7 @@ const Scroller = (): JSX.Element => {
   }, [scrollRef?.current])
 
   const onClickRegenItems = () => {
-    setItems(oldState => createItems(50));
+    setItems(oldState => createItemsSortedRandomly(50));
   }
 
   const onClickAddItems = () => {
@@ -56,15 +43,21 @@ const Scroller = (): JSX.Element => {
   }
 
   const onClickChangeVisibilityWithSameScrollPosition = () => {
+    setItems(oldState => shuffle(oldState));
     setVisibility(oldState => !oldState);
   }
 
+  const onClickItem = (itemId: string) => {
+    setSelectedItemId(itemId);
+  }
+
   const listItemsRender = items.map((item) =>
-    <li key={item.id}>id: {item.id}, name: {item.name}</li>
+    <div className="item" key={item.id} onClick={() => onClickItem(item.id)}>id: {item.id}, name: {item.name}</div>
   );
 
   return (
-    <>
+    <div style={{border: 1, padding: 20}}>
+      <div>Scroller save items position</div>
       <div>
         <button onClick={onClickRegenItems}>Regen 50 Items (your scroller position should be kept the same)</button>
         <button onClick={onClickAddItems}>Add 10 Items (your scroller position should be kept the same)</button>
@@ -72,17 +65,19 @@ const Scroller = (): JSX.Element => {
 
       <div>
         <button onClick={onClickChangeVisibility}>Change Visibility (your scroller position will be reset)</button>
-        <button onClick={onClickChangeVisibilityWithSameScrollPosition}>Change Visibility (your scroller position will be kept the same)</button>
+        <button onClick={onClickChangeVisibilityWithSameScrollPosition}>Change Visibility (items' order will be changed, but it will try to scroll to
+          the item that you choosed)
+        </button>
       </div>
       <div>Scroll Position: {scrollPosition}</div>
-
+      <div>Selected Item Id: {selectedItemId}</div>
       {visibility &&
       <div className="container" ref={scrollRef} onScroll={onScroll}>
-          <ul>{listItemsRender}</ul>
+          <div>{listItemsRender}</div>
       </div>
       }
-    </>
+    </div>
   );
 };
 
-export default Scroller;
+export default Container_SaveItemPosition;

@@ -2,8 +2,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import '../common/container.css';
 import Item from "../common/Item";
 import {createItem, createItemsSortedById} from "../common/ItemHelper";
+import ItemComp_Simple from "../common/ItemComp_Simple";
 
-const Container_SaveScrollerPosition = (): JSX.Element => {
+const Container_SaveScrollerPosition_Approach01 = (): JSX.Element => {
   const [items, setItems] = useState<Item[]>([]);
   const [visibility, setVisibility] = useState<boolean>(true);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
@@ -45,7 +46,7 @@ const Container_SaveScrollerPosition = (): JSX.Element => {
   }
 
   const listItemsRender = items.map((item) =>
-    <div className="item" key={item.id}>id: {item.id}, name: {item.name}</div>
+    <ItemComp_Simple item={item}/>
   );
 
   return (
@@ -71,4 +72,4 @@ const Container_SaveScrollerPosition = (): JSX.Element => {
   );
 };
 
-export default Container_SaveScrollerPosition;
+export default Container_SaveScrollerPosition_Approach01;

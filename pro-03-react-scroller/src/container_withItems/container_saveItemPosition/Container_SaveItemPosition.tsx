@@ -91,7 +91,9 @@ const Container_SaveItemPosition = (): JSX.Element => {
       onClick={() => onClickItem(item, index)}
       className="item"
     >
-      [{index}], id: {item.id}, name: {item.name}
+      <span className="itemIndex">[{index}]</span>
+      <span className="itemId">id: {item.id}</span>
+      name: {item.name}
     </div>
   );
 

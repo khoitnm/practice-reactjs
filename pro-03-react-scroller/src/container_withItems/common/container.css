@@ -18,3 +18,12 @@
     border: 1px solid black;
     cursor: pointer;
 }
+.itemIndex {
+    color: #BBB;
+    padding: 5px;
+}
+.itemId {
+    font-weight: bolder;
+    color: black;
+    padding: 10px;
+}

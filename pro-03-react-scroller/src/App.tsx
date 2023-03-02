@@ -11,8 +11,8 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={()=> setPage(0)}>Container_SaveScrollerPosition_Approach01</button>
-      <button onClick={()=> setPage(1)}>Container_SaveScrollerPosition_Approach02</button>
+      <button onClick={()=> setPage(0)}>Container_SaveScrollerPosition_Approach01 (use onScroll)</button>
+      <button onClick={()=> setPage(1)}>Container_SaveScrollerPosition_Approach02 (use element.addEventListener('onScroll',...)</button>
       <button onClick={()=> setPage(2)}>Container_SaveItemPosition</button>
 
       {page === 0 && <Container_SaveScrollerPosition_Approach01/>}

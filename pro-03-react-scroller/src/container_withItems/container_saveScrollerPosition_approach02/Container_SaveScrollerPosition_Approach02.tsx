@@ -10,6 +10,22 @@ const Container_SaveScrollerPosition_Approach02 = (): JSX.Element => {
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
+  const handleScroll = () => {
+    const position = scrollRef?.current?.scrollTop;
+    if (position) {
+      console.log(`set Position ${position}`);
+      setScrollPosition(position);
+    }
+  };
+
+  useEffect(() => {
+    scrollRef.current?.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      scrollRef.current?.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrollRef.current]);
+
   useEffect(() => {
     console.log(`ScrollRef.current is changed (ScrollRef itself doesn't change): ${scrollRef?.current}`);
     if (scrollRef?.current) {
@@ -36,22 +52,17 @@ const Container_SaveScrollerPosition_Approach02 = (): JSX.Element => {
     setVisibility(oldState => !oldState);
   }
 
-  const onScroll = () => {
-    console.log(`Save scroll position into React state: ${scrollRef?.current?.scrollTop}`)
-    setScrollPosition(scrollRef?.current?.scrollTop);
-  }
-
   const onClickChangeVisibilityWithSameScrollPosition = () => {
     setVisibility(oldState => !oldState);
   }
 
   const listItemsRender = items.map((item) =>
-    <ItemComp_Simple item={item}/>
+    <ItemComp_Simple key={item.id} item={item}/>
   );
 
   return (
     <div style={{borderBottom: 1, padding: 20}}>
-      <div>Scroller save scroller position</div>
+      <div>Scroller save scroller position (use scrollRef.current.addEventListener)</div>
       <div>
         <button onClick={onClickRegenItems}>Regen 50 Items (your scroller position should be kept the same)</button>
         <button onClick={onClickAddItems}>Add 10 Items (your scroller position should be kept the same)</button>
@@ -64,7 +75,7 @@ const Container_SaveScrollerPosition_Approach02 = (): JSX.Element => {
       <div>Scroll Position: {scrollPosition}</div>
 
       {visibility &&
-      <div className="container" ref={scrollRef} onScroll={onScroll}>
+      <div className="container" ref={scrollRef}>
           <div>{listItemsRender}</div>
       </div>
       }

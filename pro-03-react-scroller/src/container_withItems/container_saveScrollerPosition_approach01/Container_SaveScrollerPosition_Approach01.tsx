@@ -46,12 +46,12 @@ const Container_SaveScrollerPosition_Approach01 = (): JSX.Element => {
   }
 
   const listItemsRender = items.map((item) =>
-    <ItemComp_Simple item={item}/>
+    <ItemComp_Simple key={item.id} item={item}/>
   );
 
   return (
     <div style={{borderBottom: 1, padding: 20}}>
-      <div>Scroller save scroller position</div>
+      <div>Scroller save scroller position (use onScroll event)</div>
       <div>
         <button onClick={onClickRegenItems}>Regen 50 Items (your scroller position should be kept the same)</button>
         <button onClick={onClickAddItems}>Add 10 Items (your scroller position should be kept the same)</button>

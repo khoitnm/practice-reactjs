@@ -1,29 +1,38 @@
-import React from 'react';
+import React, {useRef} from 'react';
+import {Editor} from "@tinymce/tinymce-react";
 
-const showNotification = () => {
-    if ("Notification" in window) {
-        Notification.requestPermission().then((permission) => {
-            if (permission === "granted") {
-                const notification = new Notification("Notification Title", {
-                    body: "Notification Body",
-                });
-
-                notification.addEventListener("click", () => {
-                    window.focus(); // it will open the browser tab that has the web app that showing the notification.
-                    notification.close();
-                });
-            }
-        });
-    }
-};
 
 function App() {
+    const editorRef: React.MutableRefObject<any> = useRef(null);
+    const log = () => {
+        if (editorRef.current) {
+            console.log(editorRef.current.getContent());
+        }
+    };
     return (
-        <div className="App">
-            <header className="App-header">
-                <button onClick={showNotification}>Show Notification</button>
-            </header>
-        </div>
+        <>
+            <Editor
+                tinymceScriptSrc='/tinymce/tinymce.min.js'
+                licenseKey='gpl' /*  Please view more in https://www.tiny.cloud/docs/tinymce/latest/license-key/ */
+                onInit={(_evt, editor) => editorRef.current = editor}
+                initialValue='<p>This is the initial content of the editor.</p>'
+                init={{
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
+                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'preview', 'help', 'wordcount'
+                    ],
+                    toolbar: 'undo redo | blocks | ' +
+                        'bold italic forecolor | alignleft aligncenter ' +
+                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                        'removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                }}
+            />
+            <button onClick={log}>Log editor content</button>
+        </>
     );
 }
 

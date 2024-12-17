@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {KeyboardEvent, useCallback, useState} from 'react';
 import {createEditor, Editor, Transforms, Element, Descendant, BaseEditor} from 'slate';
 import {Editable, ReactEditor, Slate, withReact} from 'slate-react';
 import {getCircularReplacer} from "./LogHelper";
@@ -11,7 +11,10 @@ declare module 'slate' {
     }
 }
 
-type CustomElement = { type: 'paragraph'; children: CustomText[] }
+type CustomElement = {
+    type: 'paragraph' | 'code';
+    children: CustomText[]
+}
 type CustomText = { text: string }
 
 // TYPES ////////////////////////////////////
@@ -40,7 +43,7 @@ function App() {
     // Define a rendering function based on the element passed to `props`. We use
     // `useCallback` here to memoize the function for subsequent renders.
     const renderElement = useCallback((props: any) => {
-        console.log('props:', JSON.stringify(props, getCircularReplacer(), 2));
+        console.log(`elementType: ${props.element.type}, props:`, JSON.stringify(props.element, getCircularReplacer(), 2));
         switch (props.element.type) {
             case 'code':
                 return <CodeElement {...props} />
@@ -53,7 +56,7 @@ function App() {
             <Editable
                 // Pass in the `renderElement` function.
                 renderElement={renderElement}
-                onKeyDown={event => {
+                onKeyDown={(event: KeyboardEvent) => {
                     if (event.key === '&') {
                         event.preventDefault()
                         editor.insertText('and')
@@ -66,7 +69,7 @@ function App() {
                         Transforms.setNodes(
                             editor,
                             { type: 'code' },
-                            { match: n => Element.isElement(n) && Editor.isBlock(editor, n) }
+                            { match: (n: any) => Element.isElement(n) && Editor.isBlock(editor, n) }
                         )
                     }
                 }}

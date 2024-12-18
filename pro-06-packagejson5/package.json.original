@@ -1,0 +1,8 @@
+{
+  "name": "pro-00-0-react-ts-simple",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "buildPackageJson": "npx -y json5 -o package.json package.json5"
+  }
+}

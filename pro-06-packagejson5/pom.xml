@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>pro-06-packagejson5</artifactId>
+    <packaging>jar</packaging>
+    <groupId>practice-reactjs</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>pro-06-packagejson5</name>
+    <description>Practice</description>
+    <dependencies>
+    </dependencies>
+
+    <properties>
+        <com.github.eirslett.version>1.10.0</com.github.eirslett.version>
+        <node.version>v20.9.0</node.version>
+        <npm.version>10.1.0</npm.version>
+        <skipTests>true</skipTests>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/META-INF/resources/app</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <!-- Disable filtering for mp3 in the build directory.-->
+                                    <!-- maven resources plugin is filtering and corrupting mp3 files.  https://maven.apache.org/plugins/maven-resources-plugin/examples/filter.html-->
+                                    <directory>build</directory>
+                                    <includes>
+                                        <include>**/*.mp3</include>
+                                        <include>**/*.json</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <!-- Enable filtering on all files that are not mp3's in the build directory-->
+                                    <directory>build</directory>
+                                    <excludes>
+                                        <exclude>**/*.mp3</exclude>
+                                        <exclude>**/*.json</exclude>
+                                    </excludes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>${com.github.eirslett.version}</version>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>${node.version}</nodeVersion>
+                            <npmVersion>${npm.version}</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- npx -y json5 -o package.json package.json5 -->
+                        <id>convert-json5-to-json</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>npx</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>json5 -o package.json package.json5 -y</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install --legacy-peer-deps --prefer-offline --no-audit --no-fund</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm test</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <arguments>run test:ci</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
